@@ -3,9 +3,15 @@
 #include <../ext/ImGui/imgui_impl_win32.h>
 #include <../ext/ImGui/imgui_impl_dx11.h>
 #include <dwmapi.h>
+#include "../editor/settings.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dwmapi.lib")
+
+// For system tray menu
+#define ID_TRAY_EDITOR     1001
+#define ID_TRAY_SETTINGS   1002
+#define ID_TRAY_EXIT       1003
 
 // Forward declare message handler from imgui_impl_win32.cpp
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -13,7 +19,7 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 Overlay::Overlay()
     : m_hWnd(nullptr), m_running(false),
     m_pDevice(nullptr), m_pDeviceContext(nullptr), m_pSwapChain(nullptr), m_pRenderTargetView(nullptr),
-    m_width(0), m_height(0) {
+    m_width(0), m_height(0), m_trayIconAdded(false) {
 }
 
 Overlay::~Overlay() {
@@ -44,8 +50,33 @@ bool Overlay::initialize() {
     ImGui_ImplWin32_Init(m_hWnd);
     ImGui_ImplDX11_Init(m_pDevice, m_pDeviceContext);
 
-    // Initialize default crosshair
-    m_crosshair.initDefault();
+    // Initialize crosshair
+    m_crosshair = std::make_shared<Crosshair>();
+    m_crosshair->initDefault();
+
+    // Initialize editor window
+    m_editorWindow = std::make_unique<EditorWindow>();
+    m_editorWindow->initialize();
+    m_editorWindow->setCrosshair(m_crosshair);
+
+    // Set callbacks
+    m_editorWindow->setCloseCallback([this]() {
+        // Do nothing when editor is closed, just hide it
+        });
+
+    m_editorWindow->setSaveCallback([this]() {
+        // Crosshair updated, no special action needed
+        });
+
+    // Add tray icon
+    if (!addTrayIcon()) {
+        return false;
+    }
+
+    // Show editor on startup if not set to start minimized
+    if (!Settings::getInstance().startMinimized) {
+        m_editorWindow->show(true);
+    }
 
     m_running = true;
     return true;
@@ -75,6 +106,9 @@ void Overlay::run() {
 }
 
 void Overlay::shutdown() {
+    // Remove tray icon
+    removeTrayIcon();
+
     // Clean up ImGui
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
@@ -207,44 +241,4 @@ void Overlay::render() {
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    // Clear the render target
-    const float clear_color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-    m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
-    m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, clear_color);
-
-    // Draw the crosshair at the center of the screen
-    m_crosshair.draw(m_width / 2.0f, m_height / 2.0f, 1.0f);
-
-    // Render ImGui
-    ImGui::Render();
-    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
-    // Present the frame
-    m_pSwapChain->Present(1, 0);
-}
-
-LRESULT CALLBACK Overlay::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    // Pass the message to ImGui first
-    if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
-        return true;
-
-    // Get the instance pointer
-    Overlay* pOverlay = reinterpret_cast<Overlay*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
-
-    switch (msg) {
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
-    case WM_KEYDOWN:
-        if (wParam == VK_ESCAPE) {
-            if (pOverlay) {
-                pOverlay->m_running = false;
-            }
-            PostQuitMessage(0);
-            return 0;
-        }
-        break;
-    }
-
-    return DefWindowProc(hWnd, msg, wParam, lParam);
-}
+    // Clear the render

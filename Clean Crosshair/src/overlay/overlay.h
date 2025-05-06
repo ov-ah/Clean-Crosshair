@@ -5,6 +5,10 @@
 #include <string>
 #include <d3d11.h>
 #include "../common/crosshair.h"
+#include "../editor/editorWindow.h"
+
+// Define custom message for system tray
+#define WM_TRAYICON (WM_USER + 1)
 
 class Overlay {
 public:
@@ -24,7 +28,7 @@ public:
     bool isRunning() const { return m_running; }
 
     // Get crosshair instance
-    Crosshair& getCrosshair() { return m_crosshair; }
+    Crosshair& getCrosshair() { return *m_crosshair; }
 
 private:
     // Window procedure
@@ -45,6 +49,18 @@ private:
     // Clean up Direct3D resources
     void cleanupDirect3D();
 
+    // Add system tray icon
+    bool addTrayIcon();
+
+    // Remove system tray icon
+    void removeTrayIcon();
+
+    // Show system tray context menu
+    void showTrayContextMenu();
+
+    // Toggle editor window visibility
+    void toggleEditor();
+
 private:
     HWND m_hWnd;
     WNDCLASSEX m_wc;
@@ -57,9 +73,16 @@ private:
     ID3D11RenderTargetView* m_pRenderTargetView;
 
     // Crosshair data
-    Crosshair m_crosshair;
+    std::shared_ptr<Crosshair> m_crosshair;
+
+    // Editor window
+    std::unique_ptr<EditorWindow> m_editorWindow;
 
     // Window dimensions
     int m_width;
     int m_height;
+
+    // System tray icon data
+    NOTIFYICONDATA m_trayIconData;
+    bool m_trayIconAdded;
 };

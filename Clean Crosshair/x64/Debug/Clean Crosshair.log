@@ -1,8 +1,16 @@
 ﻿  fileManager.cpp
 C:\Dev\Clean Crosshair\Clean Crosshair\src\common\fileManager.cpp(23,9): error C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  crosshairEditor.cpp
-C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\crosshairEditor.cpp(187,26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\crosshairEditor.cpp(345,74): error C1075: '{': no matching token found
+  editorWindow.cpp
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\editorWindow.cpp(238,12): error C2660: 'ImGui::InputText': function does not take 2 arguments
+      C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui.h(631,29):
+      see declaration of 'ImGui::InputText'
+      C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\editorWindow.cpp(238,12):
+      while trying to match the argument list '(const char [5], std::string *)'
+  
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\editorWindow.cpp(360,96): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
   settings.cpp
 C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\settings.cpp(25,9): error C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  main.cpp
+  overlay.cpp
+C:\Dev\Clean Crosshair\Clean Crosshair\src\overlay\overlay.cpp(238,24): error C1075: '{': no matching token found
   Generating Code...

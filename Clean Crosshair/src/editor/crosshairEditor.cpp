@@ -343,4 +343,8 @@ void CrosshairEditor::previewResult() {
 }
 
 void CrosshairEditor::renderPreview(float posX, float posY, float scale) {
-    if (!m_crosshair
+    if (!m_crosshair) return;
+
+    // Draw crosshair at specified position
+    m_crosshair->draw(posX, posY, scale);
+}
