@@ -1,1 +1,8 @@
-﻿  Clean Crosshair.vcxproj -> C:\Dev\Clean Crosshair\x64\Debug\Clean Crosshair.exe
+﻿  fileManager.cpp
+C:\Dev\Clean Crosshair\Clean Crosshair\src\common\fileManager.cpp(23,9): error C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  crosshairEditor.cpp
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\crosshairEditor.cpp(187,26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\crosshairEditor.cpp(345,74): error C1075: '{': no matching token found
+  settings.cpp
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\settings.cpp(25,9): error C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
