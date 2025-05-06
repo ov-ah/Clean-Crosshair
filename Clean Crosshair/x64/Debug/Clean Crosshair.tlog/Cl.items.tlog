@@ -1,0 +1,14 @@
+C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\imgui.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui_demo.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\imgui_demo.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui_draw.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\imgui_draw.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui_impl_dx11.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\imgui_impl_dx11.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui_impl_win32.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\imgui_impl_win32.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui_tables.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\imgui_tables.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\ext\ImGui\imgui_widgets.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\imgui_widgets.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\src\common\crosshair.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\crosshair.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\src\common\fileManager.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\fileManager.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\crosshairEditor.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\crosshairEditor.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\editorWindow.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\editorWindow.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\src\editor\settings.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\settings.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\src\main.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\main.obj
+C:\Dev\Clean Crosshair\Clean Crosshair\src\overlay\overlay.cpp;C:\Dev\Clean Crosshair\Clean Crosshair\x64\Debug\overlay.obj
